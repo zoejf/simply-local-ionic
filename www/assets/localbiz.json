@@ -1,0 +1,5 @@
+[
+  {"id": "1", "name": "Powerhouse", "lat": "37.7730761", "lng": "-122.4121004", "description": "abc"},
+  {"id": "2", "name": "Castro Theatre", "lat": "37.7620377", "lng": "-122.4346968", "description": "abc"},
+  {"id": "3", "name": "Badlands", "lat": "37.7607011", "lng": "-122.4354564", "description": "abc"}
+]

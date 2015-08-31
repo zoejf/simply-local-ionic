@@ -1,0 +1,27 @@
+<ion-view view-title="Simply Local">
+  <ion-content>
+<!--     <h1>Simply Local</h1> -->
+
+<!--     <map center="current-location" /> -->
+    <div>
+      <map ng-controller="BusinessCtrl" center="current-location" zoom="15">
+        <marker ng-repeat="biz in businesses" icon="{{image}}" title="{{biz.name}}" position="{{biz.lat}}, {{biz.lng}}" on-click="showInfoWindow(event, '{{biz.name}}')"></marker>
+        <info-window position="current-location" visible="true">
+          <span>You are here</span>
+        </info-window>
+      </map>
+    </div>
+  </ion-content>
+</ion-view>
+
+<!-- href="#/app/business" -->
+
+
+<!--         <ul>
+          <li>
+            <ion-item ng-repeat="team in teams" href="#/app/teams">
+              {{ team.natRank }} {{ team.teamName }} -->
+              <!-- <lax-team info="team"></lax-team> -->
+   <!--          </ion-item>
+          </li>
+        </ul> -->
