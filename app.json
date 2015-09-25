@@ -1,7 +1,7 @@
 {
-    "name": "Devdactic Ionic to Heroku Example",
+    "name": "ionHeroku EXAMPLE ZF",
     "description": "A simple Ionic app for Heroku",
-    "repository": "https://github.com/jhars/simply-local-ionic.git",
+    "repository": "https://github.com/zoejf/simply-local-ionic.git",
     "logo": "http://www.washparkchiro.com/wp-content/uploads/2014/02/Love-Local-300x275.png",
-    "keywords": ["ionic", "devdactic", "whatever"]
+    "keywords": ["ionic", "devdactic", "simple", "local"]
 }
