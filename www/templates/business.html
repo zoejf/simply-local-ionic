@@ -1,16 +1,32 @@
 <ion-view view-title="Simply Local">
   <ion-content>
-<!--     <h1>Simply Local</h1> -->
+<!--     <h1>Simply Local</h1>
+<div ng-controller="BusinessCtrl">
+  {{businesses[0]}}
+  <div ng-repeat="biz in coord">
+    {{biz.www}}
+  </div>
+</div> -->
 
-<!--     <map center="current-location" /> -->
-    <div>
       <map ng-controller="BusinessCtrl" center="current-location" zoom="15">
-        <marker ng-repeat="biz in businesses" icon="{{image}}" title="{{biz.name}}" position="{{biz.lat}}, {{biz.lng}}" on-click="showInfoWindow(event, '{{biz.name}}')"></marker>
-        <info-window position="current-location" visible="true">
-          <span>You are here</span>
-        </info-window>
+          
+      <ion-item ng-repeat="biz in coord" ng-href="http://codepen.io/anon/pen/gpzdGw">
+        <marker icon="{{marker}}" position="{{biz.lat}}, {{biz.lng}}"></marker>
+      </ion-item>
+<!-- 
+          ng-click="login()"
+
+          ng-repeat="biz in coord" href="http://codepen.io/anon/pen/gpzdGw">
+            <marker icon="{{marker}}" position="{{biz.lat}}, {{biz.lng}}" ng-click="clickTest()"></marker>
+            {{biz.www}}
+          </a> -->
+          <!-- <marker  icon="{{image}}" title="{{biz.www}}" position="{{biz.lat}}, {{biz.lng}}">
+            <a href="{{biz.www}}">{{biz.www}}</a> -->
+<!--             <info-window position="current location" visible="true">
+              <span>You are here</span>
+            </info-window> -->
+
       </map>
-    </div>
   </ion-content>
 </ion-view>
 
