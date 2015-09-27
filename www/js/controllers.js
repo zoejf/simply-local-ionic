@@ -46,56 +46,50 @@ app.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
 
   //inject $compile into the controller
-    .controller('MapCtrl', function($scope, $ionicLoading, $compile) {
-      function initialize() {
-        var myLatlng = new google.maps.LatLng(43.07493,-89.381388);
-        
-        var mapOptions = {
-          center: myLatlng,
-          zoom: 16,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var map = new google.maps.Map(document.getElementById("map"),
-            mapOptions);
-        
-        //Marker + infowindow + angularjs compiled ng-click
-        var contentString = "<div><button class='button button-clear button-positive' ng-click='clickTest()'>Click Me</button></div>";
-        var compiled = $compile(contentString)($scope);
+    .controller('MapCtrl',['$scope', '$stateParams','$timeout', '$compile','businesses', function($scope, $stateParams, $timeout, $compile, businesses) {
+      businesses.then(function (gps) {
+          var myLatlng = new google.maps.LatLng(37.7695929,-122.4501323);
+          $scope.biz = gps.data.deals[0]
 
-        var infowindow = new google.maps.InfoWindow({
-          content: compiled[0]
-        });
-
-        var marker = new google.maps.Marker({
-          position: myLatlng,
-          map: map,
-          title: 'Uluru (Ayers Rock)'
-        });
-
-        google.maps.event.addListener(marker, 'click', function() {
-          infowindow.open(map,marker);
-        })
-
-        $scope.map = map;
-      }
-      google.maps.event.addDomListener(window, 'load', initialize);
-      
-      // $scope.centerOnMe = function() {
-      //   if(!$scope.map) {
-      //     return;
-      //   }
-
-      //   $scope.loading = $ionicLoading.show({
-      //     content: 'Getting current location...',
-      //     showBackdrop: false
-      //   });
-      // }
-      
-      $scope.clickTest = function() {
-        alert('Example of infowindow with ng-click')
-      };
-      
-    })
+          var bizCoord = [];
+           for (i = 0; i < 50; i++) {
+            bizCoord.push({ 
+              lat: gps.data.deals[i]['options'][0]["redemptionLocations"][0]["lat"],
+              lng: gps.data.deals[i]['options'][0]["redemptionLocations"][0]["lng"],
+              www: gps.data.deals[i]['dealUrl']
+            })}
+            $scope.coord = bizCoord
+          console.log(bizCoord)
+          console.log($scope.biz)
+          var mapOptions = {
+            center: myLatlng,
+            zoom: 16,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+          var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+          //Marker + infowindow + angularjs compiled ng-click
+          var contentString = "<div><button class='button button-clear button-positive' ng-click='clickTest()'>Click Me</button></div>";
+          var compiled = $compile(contentString)($scope);
+          var infowindow = new google.maps.InfoWindow({
+            content: compiled[0]
+          });
+          var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            title: 'Uluru (Ayers Rock)'
+          });
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map,marker);
+          })
+          $scope.map = map;
+          google.maps.event.addDomListener(window, 'load');
+          $scope.centerOnMe = function() {
+            if(!$scope.map) {
+              return;
+            }
+          }
+      })
+    }])
 .controller('BusinessCtrl', ['$scope', '$stateParams', '$timeout', 'businesses', function($scope, $stateParams, $timeout, businesses) {
   console.log("controller23!");
   businesses.then(function (gps) {
@@ -107,23 +101,6 @@ app.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
         www: gps.data.deals[i]['dealUrl']
       })}
       $scope.coord = bizCoord
-      $scope.image = {
-        url: 'https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple',
-        size: [20, 32],
-        origin: [0,0],
-        anchor: [0, 32]
-      };
-      // $scope.click = function(event){
-      //   var dealUrl = 
-      // }
-      $scope.clickTest = function() {
-              console.log("clicking")
-            };
-      // $scope.click = function(event) {
-      //   map.setZoom(8);
-      //   map.setCenter(marker.getPosition());
-      // }
-
 
   })
 
